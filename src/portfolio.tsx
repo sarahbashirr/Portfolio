@@ -555,7 +555,7 @@ const Portfolio = () => {
                     <span className="text-blue-400 font-semibold">Internship</span>
                   </div>
                   <p className="text-gray-300 mb-4">
-                    During my internship at Diraya, I worked on an admin panel for a service provider website. I used React and Firebase to implement CRUD operations, ensuring smooth functionality for users and administrators. This experience strengthened my full-stack development skills and gave me practical exposure to real-world project workflows, collaborative coding, and deploying functional web applications.
+                    During my internship at Diraya, I worked on an admin panel for a service provider app. I used React and Firebase to implement CRUD operations, ensuring smooth functionality for users and administrators. This experience strengthened my full-stack development skills and gave me practical exposure to real-world project workflows, collaborative coding, and deploying functional web applications.
                   </p>
                 </div>
               </div>
