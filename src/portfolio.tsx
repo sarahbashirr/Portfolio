@@ -1,20 +1,32 @@
+import { useState, useEffect } from 'react';
+import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe, ArrowRight, Download, GraduationCap } from 'lucide-react';
 
-import React, { useState, useEffect } from 'react';
-import { Menu, X, Github, Linkedin, Mail, ExternalLink, Code, Palette, Database, Globe, ArrowRight, Download, Send, Star, Award, Users, Coffee, GraduationCap } from 'lucide-react';
+// Define interfaces for type safety
+interface Project {
+  id: number;
+  title: string;
+  description: string;
+  longDescription: string;
+  tech: string[];
+  featured: boolean;
+  category: string;
+  code?: string;
+  demo?: string;
+}
 
 const Portfolio = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
   const [isScrolled, setIsScrolled] = useState(false);
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [projectFilter, setProjectFilter] = useState('All');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
       
       // Update active section based on scroll position
-      const sections = ['home', 'education', 'about', 'skills', 'projects', 'experience', 'contact'];
+      const sections = ['home', 'education', 'about', 'skills', 'projects', 'experience'];
       const current = sections.find(section => {
         const element = document.getElementById(section);
         if (element) {
@@ -32,7 +44,7 @@ const Portfolio = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const scrollToSection = (sectionId) => {
+  const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -40,14 +52,14 @@ const Portfolio = () => {
     setIsMenuOpen(false);
   };
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsFormSubmitted(true);
     // Simulate form submission
@@ -79,22 +91,21 @@ const Portfolio = () => {
       desc: 'Adobe Illustrator, Photoshop, Figma, Logo & Social Media Design', 
     }
   ];
-  
 
-  const projects = [
+  const projects: Project[] = [
     {
         id: 1,
-        title: 'Tabashir, Tutoring platfrom',
+        title: 'Tabashir, Tutoring Platform',
         description: 'Website in progress, connecting students and tutors with personalized browsing, booking, and chat features.',
-        longDescription: 'Tabashir is an intuitive tutoring platform that allows students to browse and filter tutors based on their preferences, while enabling tutors to create profiles, manage availability, and communicate with students. Built with Next.js, TypeScript, and Tailwind CSS, the platform provides seamless booking, consultation scheduling, and chat functionality, ensuring a personalized and efficient learning experience for both students and tutors."',
-        tech: ['React', 'Next js', 'Tailwind', 'Firebase', 'Typescript'],
+        longDescription: 'Tabashir is an intuitive tutoring platform that allows students to browse and filter tutors based on their preferences, while enabling tutors to create profiles, manage availability, and communicate with students. Built with Next.js, TypeScript, and Tailwind CSS, the platform provides seamless booking, consultation scheduling, and chat functionality, ensuring a personalized and efficient learning experience for both students and tutors.',
+        tech: ['React', 'Next.js', 'Tailwind', 'Firebase', 'TypeScript'],
         featured: false,
         category: 'Full Stack'
       },
     {
       id: 2,
       title: 'Medical Platform',
-      description: 'React for frontend and laravel for backend with open ai api integration',
+      description: 'React for frontend and Laravel for backend with OpenAI API integration',
       longDescription: 'Medicare Platform is a full-stack healthcare web application where users can log in as patients or doctors, each with their own profile. Patients can book appointments, receive reminders, and consult doctors, while doctors can accept or decline requests. The platform also integrates OpenAI-powered health assistance, allowing patients to input symptoms and get preliminary AI-driven guidance. Built with React, Laravel, Firebase, and MySQL, it combines a responsive frontend with a robust backend for a seamless healthcare experience.',
       tech: ['React', 'Laravel', 'PHP', 'MySQL', 'APIs'],
       code: 'https://github.com/sarahbashirr/Medicare.git',
@@ -103,10 +114,10 @@ const Portfolio = () => {
     },
     {
         id: 3,
-        title: 'Admin Panel for Service Provider app',
+        title: 'Admin Panel for Service Provider App',
         description: 'An internship project, Admin Panel web app built for managing users, service providers, requests, appointments, reviews, and roles with real-time updates and secure access.',
         longDescription: 'An Admin Panel web app built with React, TypeScript, and Firebase, allowing administrators to manage users, service providers, requests, appointments, reviews, and roles with real-time updates and role-based access control.',
-        tech: ['React', 'Tailwind', 'Typescript' ,'Node.js', 'Firebase'],
+        tech: ['React', 'Tailwind', 'TypeScript' ,'Node.js', 'Firebase'],
         featured: true,
         category: 'Full Stack'
       },
@@ -114,8 +125,8 @@ const Portfolio = () => {
       id: 4,
       title: 'Hospital Management System',
       description: 'Fully Functioning JavaFX Application with MySQL Database Connection, including seamless communication between front-end and back-end.',
-      longDescription: 'Fully Functioning JavaFX Application with MySQL Database Connection, including seamless communication between front-end and back-end. Includes Admin interface where patients, appointments and other data fields can be fully manipulated using MYSQL.',
-      tech: ['Java Fx', 'MySQL'],
+      longDescription: 'Fully Functioning JavaFX Application with MySQL Database Connection, including seamless communication between front-end and back-end. Includes Admin interface where patients, appointments and other data fields can be fully manipulated using MySQL.',
+      tech: ['JavaFX', 'MySQL'],
       code: 'https://github.com/sarahbashirr/JavaFx-Hospital-Management-System.git',
       featured: false,
       category: 'Full Stack'
@@ -135,7 +146,7 @@ const Portfolio = () => {
       id: 6,
       title: 'Hotel Management System',
       description: 'Developed using C++ while implementing the principles of Data Structures and OOP programming.',
-      longDescription: '"Developed using C++ while applying the principles of Data Structures and Object-Oriented Programming (OOP). The project features dedicated sections for a hotel, spa, and gym, each supporting full CRUD (Create, Read, Update, Delete) operations with all data stored in Excel files. Additionally, linked pricing functionality allows users to select services across these sections, with the system automatically calculating the total cost based on the chosen options.',
+      longDescription: 'Developed using C++ while applying the principles of Data Structures and Object-Oriented Programming (OOP). The project features dedicated sections for a hotel, spa, and gym, each supporting full CRUD (Create, Read, Update, Delete) operations with all data stored in Excel files. Additionally, linked pricing functionality allows users to select services across these sections, with the system automatically calculating the total cost based on the chosen options.',
       tech: ['C++'],
       code: 'https://github.com/sarahbashirr/Cpp-Hotel-Management-System.git',
       featured: false,
@@ -143,43 +154,37 @@ const Portfolio = () => {
     },
   ];
 
-
-  const [selectedProject, setSelectedProject] = useState(null);
-  const [projectFilter, setProjectFilter] = useState('All');
-
   // Define the filter categories explicitly
-const projectCategories = ['All', 'Frontend', 'Full Stack'];
+  const projectCategories = ['All', 'Frontend', 'Full Stack'];
 
-// Map your projects to the new categories
-const filteredProjects = projectFilter === 'All'
-  ? projects
-  : projects.filter(project => {
-      // Map project.category to one of the new filter categories
-      const categoryMap = {
-        'Frontend': 'Frontend',
-        'Full Stack': 'Full Stack',
-        'Graphic Design': 'Graphic Design',
-        'Frontend': 'Frontend',   // map old categories to new ones
-        'UX/UI': 'UX/UI',    // example mapping
-      };
-      return categoryMap[project.category] === projectFilter;
-    });
+  // Map your projects to the new categories
+  const filteredProjects = projectFilter === 'All'
+    ? projects
+    : projects.filter(project => {
+        const categoryMap: { [key: string]: string } = {
+          'Frontend': 'Frontend',
+          'Full Stack': 'Full Stack',
+          'Graphic Design': 'Graphic Design',
+          'UX/UI': 'UX/UI'
+        };
+        return categoryMap[project.category] === projectFilter;
+      });
 
   return (
     <div className="min-h-screen bg-black text-white">
       {/* Navigation */}
       <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black/95 backdrop-blur-sm shadow-lg border-b border-navy-900' : 'bg-transparent'
+        isScrolled ? 'bg-black/95 backdrop-blur-sm shadow-lg border-b border-gray-800' : 'bg-transparent'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-navy-400 bg-clip-text text-transparent">
+            <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
               Portfolio
             </div>
             
             {/* Desktop Menu */}
             <div className="hidden md:flex space-x-8">
-              {['home', 'education', 'about', 'skills', 'projects', 'experience', 'contact'].map((item) => (
+              {['home', 'education', 'about', 'skills', 'projects', 'experience'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
@@ -206,7 +211,7 @@ const filteredProjects = projectFilter === 'All'
         {isMenuOpen && (
           <div className="md:hidden bg-black/95 backdrop-blur-sm border-b border-gray-800">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              {['home', 'education', 'about', 'skills', 'projects', 'experience', 'contact'].map((item) => (
+              {['home', 'education', 'about', 'skills', 'projects', 'experience'].map((item) => (
                 <button
                   key={item}
                   onClick={() => scrollToSection(item)}
@@ -225,13 +230,13 @@ const filteredProjects = projectFilter === 'All'
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-navy-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-800/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
           <div className="absolute top-1/2 left-1/2 w-32 h-32 bg-blue-600/5 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '4s' }}></div>
         </div>
 
         <div className="text-center max-w-4xl mx-auto relative z-10">
           <div className="mb-8">
-            <div className="w-48 h-48 mx-auto mb-8 rounded-full bg-gradient-to-r from-blue-500 to-navy-600 p-1 animate-pulse">
+            <div className="w-48 h-48 mx-auto mb-8 rounded-full bg-gradient-to-r from-blue-500 to-blue-800 p-1 animate-pulse">
               <div className="w-full h-full rounded-full bg-black flex items-center justify-center">
                 <img
                   src="/images/profile.jpeg"
@@ -242,7 +247,7 @@ const filteredProjects = projectFilter === 'All'
             </div>
           </div>
           
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-navy-400 to-blue-400 bg-clip-text text-transparent animate-fade-in">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-blue-600 to-blue-400 bg-clip-text text-transparent animate-fade-in">
             Sarah Bashir
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
@@ -256,7 +261,7 @@ const filteredProjects = projectFilter === 'All'
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-fade-in" style={{ animationDelay: '0.6s' }}>
             <button 
               onClick={() => scrollToSection('projects')}
-              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-navy-600 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105"
+              className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105"
             >
               View My Work <ArrowRight size={18} />
             </button>
@@ -266,13 +271,13 @@ const filteredProjects = projectFilter === 'All'
           </div>
 
           <div className="flex justify-center space-x-6 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <a href="https://github.com/sarahbashirr" target="_blank" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110">
+            <a href="https://github.com/sarahbashirr" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110">
               <Github size={24} />
             </a>
-            <a href="https://www.linkedin.com/in/sarah-bashir-2607242a3"  target="_blank" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110">
+            <a href="https://www.linkedin.com/in/sarah-bashir-2607242a3" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110">
               <Linkedin size={24} />
             </a>
-            <a href="mailto:sarahbashir2005@gmail.com" target="_blank" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110">
+            <a href="mailto:sarahbashir2005@gmail.com" className="text-gray-400 hover:text-blue-400 transition-all duration-300 hover:scale-110">
               <Mail size={24} />
             </a>
           </div>
@@ -282,7 +287,7 @@ const filteredProjects = projectFilter === 'All'
       {/* Education Section */}
       <section id="education" className="py-20 px-4 bg-gray-900/30">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-navy-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             Education
           </h2>
           
@@ -309,7 +314,7 @@ const filteredProjects = projectFilter === 'All'
       {/* About Section */}
       <section id="about" className="py-20 px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-blue-400 to-navy-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-12 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             About Me
           </h2>
 
@@ -327,7 +332,7 @@ const filteredProjects = projectFilter === 'All'
 
           <div className="flex flex-wrap justify-center gap-4">
             <span className="px-4 py-2 bg-blue-500/20 rounded-full text-blue-300">2 Years Developing</span>
-            <span className="px-4 py-2 bg-navy-500/20 rounded-full text-navy-300">Remote Friendly</span>
+            <span className="px-4 py-2 bg-blue-600/20 rounded-full text-blue-300">Remote Friendly</span>
             <span className="px-4 py-2 bg-green-500/20 rounded-full text-green-300">Available for Hire</span>
           </div>
         </div>
@@ -336,7 +341,7 @@ const filteredProjects = projectFilter === 'All'
       {/* Skills Section */}
       <section id="skills" className="py-20 px-4 bg-gray-900/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-navy-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             Skills & Expertise
           </h2>
           
@@ -388,7 +393,7 @@ const filteredProjects = projectFilter === 'All'
       {/* Projects Section */}
       <section id="projects" className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-navy-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             Featured Projects
           </h2>
           
@@ -400,7 +405,7 @@ const filteredProjects = projectFilter === 'All'
                 onClick={() => setProjectFilter(category)}
                 className={`px-6 py-2 rounded-full transition-all duration-300 ${
                   projectFilter === category
-                    ? 'bg-gradient-to-r from-blue-600 to-navy-600 text-white'
+                    ? 'bg-gradient-to-r from-blue-600 to-blue-800 text-white'
                     : 'bg-gray-800/50 text-gray-300 hover:bg-gray-700/50 border border-gray-700'
                 }`}
               >
@@ -410,11 +415,11 @@ const filteredProjects = projectFilter === 'All'
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project, index) => (
+            {filteredProjects.map((project) => (
               <div key={project.id} className="bg-gray-900/50 rounded-xl overflow-hidden hover:bg-gray-800/50 transition-all duration-300 hover:transform hover:scale-105 group border border-gray-800 hover:border-blue-500/30">
                 <div className="relative overflow-hidden">
                   {project.featured && (
-                    <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-navy-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                    <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white px-3 py-1 rounded-full text-sm font-semibold">
                       Featured
                     </div>
                   )}
@@ -440,22 +445,28 @@ const filteredProjects = projectFilter === 'All'
                     {project.demo && (
                       <a 
                         href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
                         className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
                       >
                         <ExternalLink size={16} /> Live Demo
                       </a>
                     )}
                     
-                    <a 
-                      href={project.code}
-                      className="flex items-center gap-2 text-gray-400 hover:text-gray-300 transition-colors"
-                    >
-                      <Github size={16} /> Code
-                    </a>
+                    {project.code && (
+                      <a 
+                        href={project.code}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-gray-400 hover:text-gray-300 transition-colors"
+                      >
+                        <Github size={16} /> Code
+                      </a>
+                    )}
 
                     <button 
                       onClick={() => setSelectedProject(project)}
-                      className="text-navy-400 hover:text-navy-300 transition-colors ml-auto"
+                      className="text-blue-600 hover:text-blue-500 transition-colors ml-auto"
                     >
                       View Details
                     </button>
@@ -470,17 +481,17 @@ const filteredProjects = projectFilter === 'All'
       {/* Experience Section */}
       <section id="experience" className="py-20 px-4 bg-gray-900/30">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-navy-400 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             Experience
           </h2>
 
           <div className="relative">
             {/* Timeline Line */}
-            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-gradient-to-b from-blue-600 to-navy-600"></div>
+            <div className="absolute left-8 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-gradient-to-b from-blue-600 to-blue-800"></div>
 
             {/* 42 Beirut Piscine */}
             <div className="relative flex items-center mb-12 md:flex-row">
-              <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-600 to-navy-600 rounded-full border-4 border-black"></div>
+              <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full border-4 border-black"></div>
               <div className="ml-20 md:ml-0 md:w-1/2 md:pr-12">
                 <div className="bg-gray-900/50 rounded-xl p-6 hover:bg-gray-800/50 transition-all duration-300 border border-gray-800">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
@@ -496,7 +507,7 @@ const filteredProjects = projectFilter === 'All'
 
             {/* Diraya Internship */}
             <div className="relative flex items-center mb-12 md:flex-row-reverse">
-              <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-600 to-navy-600 rounded-full border-4 border-black"></div>
+              <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full border-4 border-black"></div>
               <div className="ml-20 md:ml-0 md:w-1/2 md:pl-12">
                 <div className="bg-gray-900/50 rounded-xl p-6 hover:bg-gray-800/50 transition-all duration-300 border border-gray-800">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
@@ -552,24 +563,30 @@ const filteredProjects = projectFilter === 'All'
                 {selectedProject.demo && (
                   <a 
                     href={selectedProject.demo}
-                    className="px-6 py-3 bg-gradient-to-r from-blue-600 to-navy-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 flex items-center gap-2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-lg font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all duration-300 flex items-center gap-2"
                   >
                     <ExternalLink size={18} /> Live Demo
                   </a>
                 )}
-                <a 
-                  href={selectedProject.code}
-                  className="px-6 py-3 border border-gray-600 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center gap-2"
-                >
-                  <Github size={18} /> View Code
-                </a>
+                {selectedProject.code && (
+                  <a 
+                    href={selectedProject.code}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 border border-gray-600 rounded-lg font-semibold hover:bg-gray-800 transition-colors flex items-center gap-2"
+                  >
+                    <Github size={18} /> View Code
+                  </a>
+                )}
               </div>
             </div>
           </div>
         </div>
       )}
 
-      <style jsx>{`
+      <style>{`
         @keyframes fade-in {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
