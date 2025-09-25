@@ -57,8 +57,8 @@ const Portfolio = () => {
   const handleDownloadCV = () => {
     // Create a link element and trigger download
     const link = document.createElement('a');
-    link.href = '/pdfs/Sarah_Bashir_CV.pdf'; // Path to your CV in the public folder
-    link.download = 'Sarah_Bashir_CV.pdf';
+    link.href = '/pdfs/SarahBashirCV.pdf'; // Path to your CV in the public folder
+    link.download = 'SarahBashirCV.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
