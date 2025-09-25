@@ -160,7 +160,7 @@ const Portfolio = () => {
       },
       {
         id: 8,
-        title: 'UX/UI Design Portfolio - Project 2',
+        title: 'Ethereal Escapes',
         description: 'A 3-page travel website design highlighting destinations, experiences, and easy navigation.',
         longDescription: 'A UX/UI project creating a 3-page destination website in Figma. The design showcases a clean and modern travel aesthetic, with pages for the homepage, destination listings, and a detail view. The focus was on intuitive navigation, engaging visuals, and a layout that inspires users to explore travel options. The project demonstrates skills in wireframing, visual hierarchy, and prototyping for a seamless browsing experience.',
         tech: ['Figma','Accessibility'],
