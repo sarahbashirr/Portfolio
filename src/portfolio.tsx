@@ -12,6 +12,8 @@ interface Project {
   category: string;
   code?: string;
   demo?: string;
+  preview?: string;
+  pdf?: string;
 }
 
 const Portfolio = () => {
@@ -52,21 +54,14 @@ const Portfolio = () => {
     setIsMenuOpen(false);
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsFormSubmitted(true);
-    // Simulate form submission
-    setTimeout(() => {
-      setIsFormSubmitted(false);
-      setFormData({ name: '', email: '', message: '' });
-    }, 2000);
+  const handleDownloadCV = () => {
+    // Create a link element and trigger download
+    const link = document.createElement('a');
+    link.href = '/pdfs/Sarah_Bashir_CV.pdf'; // Path to your CV in the public folder
+    link.download = 'Sarah_Bashir_CV.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const skills = [
@@ -100,7 +95,8 @@ const Portfolio = () => {
         longDescription: 'Tabashir is an intuitive tutoring platform that allows students to browse and filter tutors based on their preferences, while enabling tutors to create profiles, manage availability, and communicate with students. Built with Next.js, TypeScript, and Tailwind CSS, the platform provides seamless booking, consultation scheduling, and chat functionality, ensuring a personalized and efficient learning experience for both students and tutors.',
         tech: ['React', 'Next.js', 'Tailwind', 'Firebase', 'TypeScript'],
         featured: false,
-        category: 'Full Stack'
+        category: 'Full Stack',
+        preview: '/images/tabashir.landing.png'
       },
     {
       id: 2,
@@ -152,10 +148,40 @@ const Portfolio = () => {
       featured: false,
       category: 'Frontend'
     },
+    {
+        id: 7,
+        title: 'UX/UI Design Portfolio - Project 1',
+        description: 'User experience and interface design showcasing design thinking and user-centered approach.',
+        longDescription: 'A comprehensive UX/UI design project demonstrating user research, wireframing, prototyping, and visual design skills. This project showcases the complete design process from initial research to final implementation.',
+        tech: ['Figma', 'Adobe XD', 'User Research', 'Prototyping'],
+        featured: false,
+        category: 'UX/UI',
+        pdf: '/pdfs/ux-ui-project-1.pdf'
+      },
+      {
+        id: 8,
+        title: 'UX/UI Design Portfolio - Project 2',
+        description: 'Mobile app design focusing on user experience optimization and modern interface patterns.',
+        longDescription: 'A mobile application design project emphasizing user experience optimization, accessibility, and modern interface design patterns. Includes user journey mapping and usability testing results.',
+        tech: ['Figma', 'User Testing', 'Mobile Design', 'Accessibility'],
+        featured: false,
+        category: 'UX/UI',
+        pdf: '/pdfs/ux-ui-project-2.pdf'
+      },
+      {
+        id: 9,
+        title: 'UX/UI Design Portfolio - Project 3',
+        description: 'Web application redesign focusing on improving user engagement and conversion rates.',
+        longDescription: 'A complete web application redesign project focused on improving user engagement metrics and conversion rates through strategic UX improvements and modern UI design principles.',
+        tech: ['Figma', 'Analytics', 'A/B Testing', 'Conversion Optimization'],
+        featured: false,
+        category: 'UX/UI',
+        pdf: '/pdfs/ux-ui-project-3.pdf'
+      },
   ];
 
   // Define the filter categories explicitly
-  const projectCategories = ['All', 'Frontend', 'Full Stack'];
+  const projectCategories = ['All', 'Frontend', 'Full Stack', 'UX/UI'];
 
   // Map your projects to the new categories
   const filteredProjects = projectFilter === 'All'
@@ -265,7 +291,10 @@ const Portfolio = () => {
             >
               View My Work <ArrowRight size={18} />
             </button>
-            <button className="px-8 py-3 border border-blue-400 rounded-full font-semibold hover:bg-blue-500/10 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105">
+            <button 
+              onClick={handleDownloadCV}
+              className="px-8 py-3 border border-blue-400 rounded-full font-semibold hover:bg-blue-500/10 transition-all duration-300 flex items-center justify-center gap-2 hover:scale-105"
+            >
               Download CV <Download size={18} />
             </button>
           </div>
@@ -442,6 +471,26 @@ const Portfolio = () => {
                   </div>
                   
                   <div className="flex gap-4">
+                    {project.preview && (
+                      <button 
+                        onClick={() => setSelectedProject(project)}
+                        className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors"
+                      >
+                        <ExternalLink size={16} /> Preview Landing
+                      </button>
+                    )}
+                    
+                    {project.pdf && (
+                      <a 
+                        href={project.pdf}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
+                      >
+                        <ExternalLink size={16} /> View PDF
+                      </a>
+                    )}
+
                     {project.demo && (
                       <a 
                         href={project.demo}
@@ -490,6 +539,7 @@ const Portfolio = () => {
             <div className="absolute left-8 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-gradient-to-b from-blue-600 to-blue-800"></div>
 
             {/* 42 Beirut Piscine */}
+            {/* 42 Beirut Piscine */}
             <div className="relative flex items-center mb-12 md:flex-row">
               <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full border-4 border-black"></div>
               <div className="ml-20 md:ml-0 md:w-1/2 md:pr-12">
@@ -523,7 +573,7 @@ const Portfolio = () => {
           </div>
         </div>
       </section>
-
+        
       {/* Project Modal */}
       {selectedProject && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 p-4">
@@ -531,12 +581,23 @@ const Portfolio = () => {
             <div className="relative">
               <button 
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 bg-black/70 text-white p-2 rounded-full hover:bg-black/90 transition-colors border border-gray-600"
+                className="absolute top-4 right-4 bg-black/70 text-white p-2 rounded-full hover:bg-black/90 transition-colors border border-gray-600 z-10"
               >
                 <X size={20} />
               </button>
             </div>
             <div className="p-8">
+              {/* Show preview image if it's the Tabashir project */}
+              {selectedProject.preview && (
+                <div className="mb-6">
+                  <img 
+                    src={selectedProject.preview}
+                    alt={`${selectedProject.title} Landing Page`}
+                    className="w-full h-auto object-contain rounded-lg border border-gray-700"
+                  />
+                </div>
+              )}
+              
               <div className="flex items-center gap-4 mb-6">
                 <h3 className="text-3xl font-bold text-white">{selectedProject.title}</h3>
                 <span className="px-3 py-1 bg-blue-500/20 rounded-full text-blue-300 text-sm border border-blue-500/30">
@@ -560,6 +621,17 @@ const Portfolio = () => {
               </div>
               
               <div className="flex gap-4">
+                {selectedProject.pdf && (
+                  <a 
+                    href={selectedProject.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-800 rounded-lg font-semibold hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-300 flex items-center gap-2"
+                  >
+                    <ExternalLink size={18} /> View PDF
+                  </a>
+                )}
+                
                 {selectedProject.demo && (
                   <a 
                     href={selectedProject.demo}
