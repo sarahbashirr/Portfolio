@@ -150,10 +150,10 @@ const Portfolio = () => {
     },
     {
         id: 7,
-        title: 'UX/UI Design Portfolio - Project 1',
-        description: 'User experience and interface design showcasing design thinking and user-centered approach.',
-        longDescription: 'A comprehensive UX/UI design project demonstrating user research, wireframing, prototyping, and visual design skills. This project showcases the complete design process from initial research to final implementation.',
-        tech: ['Figma', 'Adobe XD', 'User Research', 'Prototyping'],
+        title: 'UX/UI Design, Medicare',
+        description: 'User-centered design for a healthcare platform connecting patients with doctors.',
+        longDescription: 'A complete UX/UI design project for the Medicare web application. Using a user-centered approach, the design process included user research, wireframing, and prototyping in Figma. The focus was on creating an intuitive interface where patients can search for doctors by specialization, view real-time availability, and book appointments seamlessly. The final design emphasizes accessibility, clear navigation, and a modern healthcare aesthetic.',
+        tech: ['Figma', 'Wire framing', 'Prototyping'],
         featured: false,
         category: 'UX/UI',
         pdf: '/pdfs/ux-ui-project-1.pdf'
@@ -161,22 +161,12 @@ const Portfolio = () => {
       {
         id: 8,
         title: 'UX/UI Design Portfolio - Project 2',
-        description: 'Mobile app design focusing on user experience optimization and modern interface patterns.',
-        longDescription: 'A mobile application design project emphasizing user experience optimization, accessibility, and modern interface design patterns. Includes user journey mapping and usability testing results.',
-        tech: ['Figma', 'User Testing', 'Mobile Design', 'Accessibility'],
+        description: 'A 3-page travel website design highlighting destinations, experiences, and easy navigation.',
+        longDescription: 'A UX/UI project creating a 3-page destination website in Figma. The design showcases a clean and modern travel aesthetic, with pages for the homepage, destination listings, and a detail view. The focus was on intuitive navigation, engaging visuals, and a layout that inspires users to explore travel options. The project demonstrates skills in wireframing, visual hierarchy, and prototyping for a seamless browsing experience.',
+        tech: ['Figma','Accessibility'],
         featured: false,
         category: 'UX/UI',
         pdf: '/pdfs/ux-ui-project-2.pdf'
-      },
-      {
-        id: 9,
-        title: 'UX/UI Design Portfolio - Project 3',
-        description: 'Web application redesign focusing on improving user engagement and conversion rates.',
-        longDescription: 'A complete web application redesign project focused on improving user engagement metrics and conversion rates through strategic UX improvements and modern UI design principles.',
-        tech: ['Figma', 'Analytics', 'A/B Testing', 'Conversion Optimization'],
-        featured: false,
-        category: 'UX/UI',
-        pdf: '/pdfs/ux-ui-project-3.pdf'
       },
   ];
 
