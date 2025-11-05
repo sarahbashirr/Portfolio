@@ -528,7 +528,22 @@ const Portfolio = () => {
             {/* Timeline Line */}
             <div className="absolute left-8 md:left-1/2 transform md:-translate-x-px h-full w-0.5 bg-gradient-to-b from-blue-600 to-blue-800"></div>
 
-            {/* 42 Beirut Piscine */}
+            {/* Vanri company Internship */}
+            <div className="relative flex items-center mb-12 md:flex-row-reverse">
+  <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full border-4 border-black"></div>
+  <div className="ml-20 md:ml-0 md:w-1/2 md:pl-12">
+    <div className="bg-gray-900/50 rounded-xl p-6 hover:bg-gray-800/50 transition-all duration-300 border border-gray-800">
+      <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+        <h3 className="text-xl font-bold text-white">Vanrise Internship</h3>
+        <span className="text-blue-400 font-semibold">Nov 2025 - Dec 2025</span>
+      </div>
+      <p className="text-gray-300 mb-4">
+        During my 7-week remote internship at Vanrise, I participated in a structured, task-based training program focused on modern web technologies including JavaScript, HTML5, CSS, Bootstrap, AngularJS, C#, and MSSQL. Through live sessions and hands-on assignments, I gained practical experience in layered architecture, problem-solving, and transforming real requirements into a fully functional product. This internship enhanced my technical foundation and strengthened my analytical and full-stack development skills.
+      </p>
+    </div>
+  </div>
+</div>
+
             {/* 42 Beirut Piscine */}
             <div className="relative flex items-center mb-12 md:flex-row">
               <div className="absolute left-8 md:left-1/2 transform -translate-x-1/2 w-4 h-4 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full border-4 border-black"></div>
@@ -536,7 +551,7 @@ const Portfolio = () => {
                 <div className="bg-gray-900/50 rounded-xl p-6 hover:bg-gray-800/50 transition-all duration-300 border border-gray-800">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                     <h3 className="text-xl font-bold text-white">42 Beirut Piscine</h3>
-                    <span className="text-blue-400 font-semibold">Month-long</span>
+                    <span className="text-blue-400 font-semibold">April 2025</span>
                   </div>
                   <p className="text-gray-300 mb-4">
                     At 42 Beirut, I completed the Piscine, an intensive, month-long coding bootcamp where I worked on a series of C programming projects under pressure. The peer-to-peer evaluation system helped me improve through collaborative feedback while developing strong problem-solving skills in a competitive environment. This experience taught me to adapt quickly, work independently, and manage time effectively in high-stress situations.
@@ -552,7 +567,7 @@ const Portfolio = () => {
                 <div className="bg-gray-900/50 rounded-xl p-6 hover:bg-gray-800/50 transition-all duration-300 border border-gray-800">
                   <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
                     <h3 className="text-xl font-bold text-white">Diraya Internship</h3>
-                    <span className="text-blue-400 font-semibold">Internship</span>
+                    <span className="text-blue-400 font-semibold">Sept 2025 - Nov 2025</span>
                   </div>
                   <p className="text-gray-300 mb-4">
                     During my internship at Diraya, I worked on an admin panel for a service provider app. I used React and Firebase to implement CRUD operations, ensuring smooth functionality for users and administrators. This experience strengthened my full-stack development skills and gave me practical exposure to real-world project workflows, collaborative coding, and deploying functional web applications.
