@@ -148,28 +148,8 @@ const Portfolio = () => {
       featured: false,
       category: 'Frontend'
     },
-    {
+      {
         id: 7,
-        title: 'UX/UI Design, Medicare',
-        description: 'User-centered design for a healthcare platform connecting patients with doctors.',
-        longDescription: 'A complete UX/UI design project for the Medicare web application. Using a user-centered approach, the design process included user research, wireframing, and prototyping in Figma. The focus was on creating an intuitive interface where patients can search for doctors by specialization, view real-time availability, and book appointments seamlessly. The final design emphasizes accessibility, clear navigation, and a modern healthcare aesthetic.',
-        tech: ['Figma', 'Wire framing', 'Prototyping'],
-        featured: false,
-        category: 'UX/UI',
-        pdf: '/pdfs/ux-ui-project-1.pdf'
-      },
-      {
-        id: 8,
-        title: 'Ethereal Escapes',
-        description: 'A 3-page travel website design highlighting destinations, experiences, and easy navigation.',
-        longDescription: 'A UX/UI project creating a 3-page destination website in Figma. The design showcases a clean and modern travel aesthetic, with pages for the homepage, destination listings, and a detail view. The focus was on intuitive navigation, engaging visuals, and a layout that inspires users to explore travel options. The project demonstrates skills in wireframing, visual hierarchy, and prototyping for a seamless browsing experience.',
-        tech: ['Figma','Accessibility'],
-        featured: false,
-        category: 'UX/UI',
-        pdf: '/pdfs/ux-ui-project-2.pdf'
-      },
-      {
-        id: 9,
         title: 'Motivio – Productivity & Motivation Platform',
         description: 'A web platform designed to help users stay motivated, track goals, and build consistent habits through a clean and engaging interface.',
         longDescription: 'Motivio is a user-centered web application designed to help individuals stay motivated and productive by tracking goals, maintaining consistency, and building better habits. The platform focuses on simplicity and clarity, allowing users to easily set goals, monitor progress, and stay engaged through an intuitive interface. During development, emphasis was placed on user experience, ensuring smooth navigation, minimal friction, and a visually motivating design that encourages daily use.',
