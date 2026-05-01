@@ -151,8 +151,7 @@ const Portfolio = () => {
       {
         id: 7,
         title: 'Motivio – Productivity & Motivation Platform',
-        description: 'A web platform designed to help users stay motivated, track goals, and build consistent habits through a clean and engaging interface.',
-        longDescription: 'Motivio is a user-centered web application designed to help individuals stay motivated and productive by tracking goals, maintaining consistency, and building better habits. The platform focuses on simplicity and clarity, allowing users to easily set goals, monitor progress, and stay engaged through an intuitive interface. During development, emphasis was placed on user experience, ensuring smooth navigation, minimal friction, and a visually motivating design that encourages daily use.',
+        description: 'Motivio is a user-centered web application designed to help individuals stay motivated and productive by tracking goals, maintaining consistency, and building better habits. The platform focuses on simplicity and clarity, allowing users to easily set goals, monitor progress, and stay engaged through an intuitive interface. To address common challenges such as loss of motivation and inconsistency, the platform incorporates streak tracking and social challenges, encouraging accountability through friendly competition. Features like posture checking, personalized workout plans, and basic nutrition guidance were added to support users in building sustainable daily habits beyond productivity alone. Throughout development, emphasis was placed on reducing friction, improving usability, and creating a visually engaging experience that motivates users to return consistently and maintain progress over time.',
         tech: ['React', 'Node.js', 'Express', 'MongoDB', 'CSS'],
         demo: 'https://motivio-production.up.railway.app/',
         code: 'https://github.com/sarahbashirr/Motivio.git', // add GitHub if you have it
@@ -165,17 +164,13 @@ const Portfolio = () => {
   const projectCategories = ['All', 'Frontend', 'Full Stack', 'UX/UI'];
 
   // Map your projects to the new categories
-  const filteredProjects = projectFilter === 'All'
+
+  const filteredProjects =
+  projectFilter === 'All'
     ? projects
-    : projects.filter(project => {
-        const categoryMap: { [key: string]: string } = {
-          'Frontend': 'Frontend',
-          'Full Stack': 'Full Stack',
-          'Graphic Design': 'Graphic Design',
-          'UX/UI': 'UX/UI'
-        };
-        return categoryMap[project.category] === projectFilter;
-      });
+    : projects.filter(project =>
+        project.category.includes(projectFilter)
+      );
 
   return (
     <div className="min-h-screen bg-black text-white">
