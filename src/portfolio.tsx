@@ -168,6 +168,17 @@ const Portfolio = () => {
         category: 'UX/UI',
         pdf: '/pdfs/ux-ui-project-2.pdf'
       },
+      {
+        id: 9,
+        title: 'Motivio – Productivity & Motivation Platform',
+        description: 'A web platform designed to help users stay motivated, track goals, and build consistent habits through a clean and engaging interface.',
+        longDescription: 'Motivio is a user-centered web application designed to help individuals stay motivated and productive by tracking goals, maintaining consistency, and building better habits. The platform focuses on simplicity and clarity, allowing users to easily set goals, monitor progress, and stay engaged through an intuitive interface. During development, emphasis was placed on user experience, ensuring smooth navigation, minimal friction, and a visually motivating design that encourages daily use.',
+        tech: ['React', 'Node.js', 'Express', 'MongoDB', 'CSS'],
+        demo: 'https://motivio-production.up.railway.app/',
+        code: 'https://github.com/sarahbashirr/Motivio.git', // add GitHub if you have it
+        featured: true,
+        category: 'Full Stack', 'UX/UI'
+      }
   ];
 
   // Define the filter categories explicitly
