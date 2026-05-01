@@ -95,7 +95,7 @@ const Portfolio = () => {
         longDescription: 'Tabashir is an intuitive tutoring platform that allows students to browse and filter tutors based on their preferences, while enabling tutors to create profiles, manage availability, and communicate with students. Built with Next.js, TypeScript, and Tailwind CSS, the platform provides seamless booking, consultation scheduling, and chat functionality, ensuring a personalized and efficient learning experience for both students and tutors.',
         tech: ['React', 'Next.js', 'Tailwind', 'Firebase', 'TypeScript'],
         featured: false,
-        category: 'Full Stack',
+        category: 'UX/UI',
         preview: '/images/tabashir.landing.png'
       },
     {
@@ -457,7 +457,7 @@ const Portfolio = () => {
                         onClick={() => setSelectedProject(project)}
                         className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors"
                       >
-                        <ExternalLink size={16} /> Preview Landing
+                        <ExternalLink size={16} /> Preview Landing Page
                       </button>
                     )}
                     
