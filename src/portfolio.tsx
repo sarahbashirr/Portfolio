@@ -9,7 +9,7 @@ interface Project {
   longDescription: string;
   tech: string[];
   featured: boolean;
-  category: string;
+  category: string[]; // ✅ change this
   code?: string;
   demo?: string;
   preview?: string;
@@ -157,7 +157,7 @@ const Portfolio = () => {
         demo: 'https://motivio-production.up.railway.app/',
         code: 'https://github.com/sarahbashirr/Motivio.git', // add GitHub if you have it
         featured: true,
-        category: 'Full Stack', 'UX/UI'
+        category: ['Full Stack', 'UX/UI'],
       }
   ];
 
