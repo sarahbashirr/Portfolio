@@ -22,6 +22,8 @@ const Portfolio = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [projectFilter, setProjectFilter] = useState('All');
+  const featuredProject = projects.find(p => p.id === 7);
+const otherProjects = projects.filter(p => p.id !== 7);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -148,16 +150,23 @@ const Portfolio = () => {
       featured: false,
       category: 'Frontend'
     },
-      {
-        id: 7,
-        title: 'Motivio – Productivity & Motivation Platform',
-        description: 'Motivio is a user-centered web application designed to help individuals stay motivated and productive by tracking goals, maintaining consistency, and building better habits. The platform focuses on simplicity and clarity, allowing users to easily set goals, monitor progress, and stay engaged through an intuitive interface. To address common challenges such as loss of motivation and inconsistency, the platform incorporates streak tracking and social challenges, encouraging accountability through friendly competition. Features like posture checking, personalized workout plans, and basic nutrition guidance were added to support users in building sustainable daily habits beyond productivity alone. Throughout development, emphasis was placed on reducing friction, improving usability, and creating a visually engaging experience that motivates users to return consistently and maintain progress over time.',
-        tech: ['React', 'Node.js', 'Express', 'MongoDB', 'CSS'],
-        demo: 'https://motivio-production.up.railway.app/',
-        code: 'https://github.com/sarahbashirr/Motivio.git', // add GitHub if you have it
-        featured: true,
-        category: ['Full Stack', 'UX/UI'],
-      }
+    {
+      id: 7,
+      title: 'Motivio – Productivity & Motivation Platform',
+      description:
+        'Motivio is a user-centered web application designed to help individuals stay motivated and productive by tracking goals, maintaining consistency, and building better habits. It includes streak tracking, social challenges, posture checking, workout plans, and nutrition guidance to support a healthier and more consistent lifestyle.',
+    
+      longDescription:
+        'Motivio is a user-centered productivity and wellness platform designed to help individuals stay motivated through goal tracking, streaks, and social challenges. It enhances accountability with friend competitions while supporting healthy habits through posture tracking, personalized workout plans, and basic nutrition guidance. The focus is on simplicity, usability, and engagement to ensure users stay consistent and improve daily routines over time.',
+    
+      tech: ['React', 'Node.js', 'Laravel', 'Ollama', 'CSS', 'MySQL'],
+      demo: 'https://motivio-production.up.railway.app/',
+      code: 'https://github.com/sarahbashirr/Motivio.git',
+    
+      featured: true,
+    
+      category: ['Full Stack', 'UX/UI'],
+    }
   ];
 
   // Define the filter categories explicitly
