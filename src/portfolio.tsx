@@ -379,7 +379,95 @@ const Portfolio = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 bg-gradient-to-r from-blue-400 to-blue-600 bg-clip-text text-transparent">
             Featured Projects
           </h2>
-          
+
+          {/* ✨ Motivio Hero Card — always shown at top */}
+          {(() => {
+            const motivio = projects.find(p => p.id === 7)!;
+            return (
+              <div className="relative mb-16 rounded-2xl overflow-hidden border border-blue-500/40 bg-gradient-to-br from-gray-900 via-blue-950/30 to-gray-900 shadow-2xl shadow-blue-500/10">
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-600/5 via-transparent to-blue-800/5 pointer-events-none" />
+                <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+
+                <div className="relative z-10 p-8 md:p-12 flex flex-col md:flex-row gap-10 items-start">
+                  {/* Left: text */}
+                  <div className="flex-1">
+                    <div className="flex flex-wrap items-center gap-3 mb-5">
+                      <span className="px-3 py-1 bg-gradient-to-r from-blue-600 to-blue-800 text-white text-xs font-bold rounded-full uppercase tracking-widest">
+                        ⭐ Best Project
+                      </span>
+                      {motivio.category.map((cat, i) => (
+                        <span key={i} className="px-3 py-1 bg-blue-500/15 border border-blue-500/30 text-blue-300 text-xs rounded-full">
+                          {cat}
+                        </span>
+                      ))}
+                    </div>
+
+                    <h3 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+                      {motivio.title}
+                    </h3>
+                    <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                      {motivio.longDescription}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {motivio.tech.map((tech, i) => (
+                        <span key={i} className="px-3 py-1 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm">
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-4">
+                      {motivio.demo && (
+                        <a
+                          href={motivio.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-800 rounded-full font-semibold text-white hover:shadow-lg hover:shadow-blue-500/30 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                        >
+                          <ExternalLink size={16} /> Live Demo
+                        </a>
+                      )}
+                      {motivio.code && (
+                        <a
+                          href={motivio.code}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-6 py-3 border border-gray-600 rounded-full font-semibold text-gray-300 hover:bg-gray-800 hover:border-blue-500/50 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                        >
+                          <Github size={16} /> View Code
+                        </a>
+                      )}
+                      <button
+                        onClick={() => setSelectedProject(motivio)}
+                        className="px-6 py-3 border border-blue-500/40 rounded-full font-semibold text-blue-400 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105"
+                      >
+                        View Details
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Right: decorative stat pills */}
+                  <div className="flex flex-col gap-4 md:min-w-[200px]">
+                    {[
+                      { label: 'Type', value: 'Full Stack + AI' },
+                      { label: 'Stack', value: 'React · Laravel · MySQL' },
+                      { label: 'AI Model', value: 'Ollama (local LLM)' },
+                      { label: 'Status', value: '🟢 Live' },
+                    ].map((stat, i) => (
+                      <div key={i} className="bg-black/40 border border-gray-700/50 rounded-xl px-5 py-4">
+                        <p className="text-xs text-gray-500 uppercase tracking-widest mb-1">{stat.label}</p>
+                        <p className="text-sm text-gray-200 font-medium">{stat.value}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Filter buttons */}
           <div className="flex flex-wrap justify-center gap-4 mb-12">
             {projectCategories.map((category) => (
               <button
@@ -396,24 +484,26 @@ const Portfolio = () => {
             ))}
           </div>
           
+          {/* Other projects grid — Motivio excluded since it's shown above */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
+            {filteredProjects.filter(p => p.id !== 7).map((project) => (
               <div key={project.id} className="bg-gray-900/50 rounded-xl overflow-hidden hover:bg-gray-800/50 transition-all duration-300 hover:transform hover:scale-105 group border border-gray-800 hover:border-blue-500/30">
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden h-2">
                   {project.featured && (
                     <div className="absolute top-4 left-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white px-3 py-1 rounded-full text-sm font-semibold">
                       Featured
                     </div>
                   )}
-                  {/* ✅ FIXED: category is now an array, join it for display */}
-                  <div className="absolute top-4 right-4 bg-black/70 text-white px-2 py-1 rounded text-sm border border-gray-700">
-                    {project.category.join(', ')}
-                  </div>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors">
-                    {project.title}
-                  </h3>
+                  <div className="flex items-center gap-2 mb-3">
+                    <h3 className="text-xl font-bold text-white group-hover:text-blue-400 transition-colors flex-1">
+                      {project.title}
+                    </h3>
+                    <span className="text-xs bg-black/50 border border-gray-700 text-gray-400 px-2 py-1 rounded whitespace-nowrap">
+                      {project.category.join(', ')}
+                    </span>
+                  </div>
                   <p className="text-gray-400 mb-4 line-clamp-3">{project.description}</p>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
@@ -430,43 +520,27 @@ const Portfolio = () => {
                         onClick={() => setSelectedProject(project)}
                         className="flex items-center gap-2 text-green-400 hover:text-green-300 transition-colors"
                       >
-                        <ExternalLink size={16} /> Preview Landing Page
+                        <ExternalLink size={16} /> Preview
                       </button>
                     )}
-                    
                     {project.pdf && (
-                      <a 
-                        href={project.pdf}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors"
-                      >
+                      <a href={project.pdf} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-purple-400 hover:text-purple-300 transition-colors">
                         <ExternalLink size={16} /> View PDF
                       </a>
                     )}
-
                     {project.demo && (
-                      <a 
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors"
-                      >
+                      <a href={project.demo} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-blue-400 hover:text-blue-300 transition-colors">
                         <ExternalLink size={16} /> Live Demo
                       </a>
                     )}
-                    
                     {project.code && (
-                      <a 
-                        href={project.code}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-2 text-gray-400 hover:text-gray-300 transition-colors"
-                      >
+                      <a href={project.code} target="_blank" rel="noopener noreferrer"
+                        className="flex items-center gap-2 text-gray-400 hover:text-gray-300 transition-colors">
                         <Github size={16} /> Code
                       </a>
                     )}
-
                     <button 
                       onClick={() => setSelectedProject(project)}
                       className="text-blue-600 hover:text-blue-500 transition-colors ml-auto"
