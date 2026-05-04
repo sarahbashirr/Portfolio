@@ -297,8 +297,8 @@ const Portfolio = () => {
                 <h4 className="text-xl text-blue-400 mb-3">Antonine University</h4>
                 <p className="text-gray-300 mb-4">September 2022 - December 2025</p>
                 <p className="text-gray-400 leading-relaxed">
-                  Currently pursuing a Bachelor's degree in Computer Science, focusing on software development, 
-                  data structures, algorithms, and full-stack web development. Gaining comprehensive knowledge 
+                  Achieved a Bachelor's degree in Computer Science, which focused on software development, 
+                  data structures, algorithms, and full-stack web development. Where I gained comprehensive knowledge 
                   in programming languages, database management, and modern development frameworks.
                 </p>
               </div>
